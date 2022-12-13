@@ -103,9 +103,20 @@ function login(){
 
 }
 
-function sendPost()
+function sendPost(){
+    const postContentField = document.querySelector("#sendPostContent")
+    let content = postContentField.value
+    let body = {content:content}
+    doTheFetchThingForMeIamVeryLazy("post","POST",body,true)
+        .then((data)=>{
+            if(!data.id){
+                alert("failed to send post")
+            }else{
+                showPost(data.id)
+            }
+        })
 
-///here
+}
 function deletePost(id){
     console.log(token)
     doTheFetchThingForMeIamVeryLazy(`posts/${id}`,"DELETE",null,true)
